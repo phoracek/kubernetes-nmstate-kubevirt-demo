@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -xe
+
+vagrant ssh node1 -c '
+sudo yum install -y NetworkManager NetworkManager-ovs && \
+sudo systemctl daemon-reload && \
+sudo systemctl restart NetworkManager
+'
+
+vagrant ssh management -c '
+git clone https://github.com/nmstate/kubernetes-nmstate && \
+cd kubernetes-nmstate && \
+sed -i "s/yuvalif/phoracek/g" manifests/state-controller-ds.yaml && \
+kubectl create ns nmstate-default && \
+kubectl create -f manifests/rbac.authorization.k8s.yaml && \
+kubectl create -f manifests/generated/net-state-crd.yaml && \
+kubectl create -f manifests/state-controller-ds.yaml
+'

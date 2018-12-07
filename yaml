@@ -1,0 +1,246 @@
+apiVersion: v1
+items:
+- apiVersion: nmstate.io/v1
+  kind: NodeNetworkState
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"nmstate.io/v1","kind":"NodeNetworkState","metadata":{"annotations":{},"creationTimestamp":null,"name":"192.168.122.101","namespace":"nmstate-default"},"spec":{"desiredState":{"interfaces":[{"bridge":{"options":{"fail-mode":"","mcast-snooping-enable":false,"rstp":false,"stp":true},"port":[{"name":"eth2","type":"system"}]},"description":"OVS bridge for secondary pod networking","ipv4":{"enabled":false},"ipv6":{"enabled":false},"name":"br1","state":"up","type":"ovs-bridge"},{"description":"Bridge physical interface","ipv4":{"enabled":false},"ipv6":{"enabled":false},"name":"eth2","state":"up","type":"ethernet"}]},"managed":true,"nodeName":"node1"},"status":{"currentState":{"capabilities":null,"interfaces":null}}}
+    creationTimestamp: "2019-01-28T14:01:43Z"
+    generation: 3
+    name: 192.168.122.101
+    namespace: nmstate-default
+    resourceVersion: "2984"
+    selfLink: /apis/nmstate.io/v1/namespaces/nmstate-default/nodenetworkstates/192.168.122.101
+    uid: 3e142c04-2305-11e9-a381-5254002a0e7d
+  spec:
+    desiredState:
+      interfaces:
+      - bridge:
+          port:
+          - name: eth2
+            type: system
+        description: OVS bridge for secondary pod networking
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        name: br1
+        state: up
+        type: ovs-bridge
+      - description: Bridge physical interface
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        name: eth2
+        state: up
+        type: ethernet
+    managed: true
+    nodeName: node1
+  status:
+    currentState:
+      capabilities: null
+      interfaces:
+      - bridge:
+          port:
+          - name: eth2
+            type: system
+        description: OVS bridge for secondary pod networking
+        ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 0
+        name: br1
+        state: up
+        type: ovs-bridge
+      - ifIndex: 0
+        ipv4:
+          address:
+          - ip: 10.233.64.1
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          address:
+          - ip: fe80::642f:20ff:fe04:5e06
+            prefix-length: 64
+          enabled: true
+        mtu: 1450
+        name: cni0
+        state: up
+        type: unknown
+      - ifIndex: 0
+        ipv4:
+          address:
+          - ip: 172.17.0.1
+            prefix-length: 16
+          enabled: true
+        ipv6:
+          enabled: false
+        mtu: 1500
+        name: docker0
+        state: up
+        type: unknown
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1500
+        name: dummy0
+        state: down
+        type: dummy
+      - ifIndex: 0
+        ipv4:
+          address:
+          - ip: 192.168.121.54
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          address:
+          - ip: fe80::5054:ff:fe2a:e7d
+            prefix-length: 64
+          enabled: true
+        mtu: 1500
+        name: eth0
+        state: up
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          address:
+          - ip: 192.168.122.101
+            prefix-length: 24
+          enabled: true
+        ipv6:
+          address:
+          - ip: fe80::5054:ff:fe89:7ecb
+            prefix-length: 64
+          enabled: true
+        mtu: 1500
+        name: eth1
+        state: up
+        type: ethernet
+      - description: Bridge physical interface
+        ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1500
+        name: eth2
+        state: up
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: flannel.1
+        state: down
+        type: unknown
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1500
+        name: kube-ipvs0
+        state: down
+        type: dummy
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 65536
+        name: lo
+        state: down
+        type: unknown
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: veth058f7452
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: veth10b932eb
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: veth2236eb0a
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: veth53fdc615
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: veth8dac5d00
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: vethc8af2bb2
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: vethd0348a79
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: vethe0a5283f
+        state: down
+        type: ethernet
+      - ifIndex: 0
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+        mtu: 1450
+        name: vethf0c35676
+        state: down
+        type: ethernet
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

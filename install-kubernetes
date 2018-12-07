@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -xe
+
+vagrant ssh management -c '
+ssh-keygen -f .ssh/id_rsa -t rsa -N "" && \
+echo "StrictHostKeyChecking no" > .ssh/config && \
+chmod 600 ~/.ssh/config && \
+sudo dnf -y install sshpass && \
+sshpass -p vagrant ssh-copy-id vagrant@192.168.122.101 && \
+sudo yum -y install git ansible python3 python3-pip && \
+git clone https://github.com/kubernetes-sigs/kubespray && \
+cd kubespray && \
+sudo pip3 install -r requirements.txt > /dev/null && \
+cp -rfp inventory/sample inventory/mycluster && \
+echo "
+[all]
+node1    ansible_host=192.168.122.101 ip=192.168.122.101
+
+[kube-master]
+node1
+
+[etcd]
+node1
+
+[kube-node]
+node1
+
+[k8s-cluster:children]
+kube-master
+kube-node
+
+[calico-rr]
+
+[vault]
+node1
+" > inventory/mycluster/hosts.ini && \
+sed -i "s/kube_network_plugin: calico/kube_network_plugin: flannel/g" inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml && \
+ansible-playbook -i inventory/mycluster/hosts.ini --become --become-user=root cluster.yml && \
+echo "[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+" | sudo tee /etc/yum.repos.d/kubernetes.repo && \
+sudo dnf -y install kubectl --disableexcludes=kubernetes && \
+cd && \
+mkdir -p .kube/ && \
+ssh vagrant@192.168.122.101 "sudo cat /root/.kube/config" > .kube/config
+'
+
+vagrant ssh node1 -c "sudo cat /root/.kube/config" > .kubeconfig
